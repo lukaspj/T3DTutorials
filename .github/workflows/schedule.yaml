@@ -34,6 +34,7 @@ jobs:
         uses: actions/checkout@master
         with:
           ref: ${{ matrix.branch }}
+          submodules: true
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v1
         with:
