@@ -1,0 +1,57 @@
+name: Deploy branch on push
+
+on:
+  push:
+
+# CONFIGURATION
+# For help, go to https://github.com/Azure/Actions
+#
+# 1. Set up the following secrets in your repository:
+#   AZURE_FUNCTIONAPP_PUBLISH_PROFILE
+#
+# 2. Change these variables for your configuration:
+env:
+  AZURE_STORAGE_PACKAGE_PATH: .
+  AZURE_STORAGE_CONTAINER_URL: https://personalfrontend.blob.core.windows.net/t3dtutorials
+  AZURE_STORAGE_SAS_TOKEN: ${{ secrets.AZURE_STORAGE_SAS_TOKEN }}
+  HUGO_VERSION: 0.75.1
+  AZCOPY_VERSION: 10
+  NODE_VERSION: 12.x
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@master
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v2.x
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Install hugo + azcopy
+        run: |
+          echo "installing postcss"
+          npm install -g postcss postcss-cli autoprefixer
+          echo "installing hugo"
+          sudo mkdir -p /home/hugo/
+          # curl -L https://github.com/gohugoio/hugo/releases/download/v${{ env.HUGO_VERSION }}/hugo_extended_${{ env.HUGO_VERSION }}_Linux-64bit.tar.gz | tar -zxf - --directory /home/hugo/
+          curl -L https://personalfrontend.blob.core.windows.net/misc/chugo_linux -o /home/hugo/hugo
+          sudo chmod +x /home/hugo/hugo
+          sudo mv /home/hugo/hugo /usr/bin/
+          echo "installing azcopy"
+          sudo mkdir -p /home/azcopy/
+          curl -L https://aka.ms/downloadazcopy-v${{ env.AZCOPY_VERSION }}-linux | tar -zxf - --directory /home/azcopy/
+          sudo mv $(find /home/azcopy/ -type f -name azcopy) /usr/bin/
+      - name: Run hugo + azcopy
+        env:
+          AZURE_STORAGE_CONTAINER_URL: ${{ env.AZURE_STORAGE_CONTAINER_URL }}/${{ env.GITHUB_REF_SLUG_URL }}
+          AZURE_STORAGE_SAS_TOKEN: ${{ env.AZURE_STORAGE_SAS_TOKEN }}
+        run: |
+          echo "Deploying to: ${AZURE_STORAGE_CONTAINER_URL}"
+          export HUGO_ENV='production'
+          hugo -v --minify --enableGitInfo
+          azcopy sync public/ "${AZURE_STORAGE_CONTAINER_URL}${AZURE_STORAGE_SAS_TOKEN}" --delete-destination=true
+
+# For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples

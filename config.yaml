@@ -1,0 +1,43 @@
+baseURL: https://t3dtutorials.lukasj.org/
+languageCode: en-us
+title: Torque3D Tutorials
+theme: color-your-world
+
+copyright: "Copyright © 2020–2021, Lukas Aldershaab;\n All rights reserved."
+
+paginate: 5
+
+enableEmoji: true
+enableInlineShortcodes: true
+
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+  highlight:
+    noClasses: false
+
+params:
+  style:
+    isDark: true
+
+  author: Lukas Aldershaab
+
+  search:
+    enable: "true"
+
+languages:
+  en:
+    params:
+      search:
+        enable: true
+    menu:
+      main:
+        - name: About
+          weight: 1
+          url: about/
+        - name: Posts
+          weight: 2
+          url: posts/
