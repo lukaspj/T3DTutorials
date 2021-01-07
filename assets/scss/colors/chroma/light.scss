@@ -9,6 +9,11 @@ li code {
   background-color: #002b36;
 }
 
+.chroma .err {
+  color: #eb0083;
+  background-color: #1e0010;
+}
+
 .chroma .lntd {
   vertical-align: top;
   padding: 0;
@@ -66,6 +71,8 @@ li code {
   color: #848f8f;
 }
 
+.chroma .kd,
+.chroma .kr,
 .chroma .k,
 .chroma .kn,
 .chroma .kp,
@@ -78,9 +85,8 @@ li code {
   color: #859900;
 }
 
-.chroma .kd,
-.chroma .kr,
 .chroma .bp,
+.chroma .na,
 .chroma .nc,
 .chroma .nd,
 .chroma .nf,
@@ -88,6 +94,10 @@ li code {
 .chroma .nv,
 .chroma .gu {
   color: #3294da;
+}
+
+.chroma .nv {
+  color: #a2c1d8;
 }
 
 .chroma .kt,
@@ -121,4 +131,8 @@ li code {
 .chroma .cm,
 .chroma .c1 {
   color: #759299;
+}
+
+.chroma .vg {
+  color: #e5be58;
 }
