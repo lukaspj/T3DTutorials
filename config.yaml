@@ -22,6 +22,8 @@ markup:
 params:
   style:
     isDark: true
+    darkAccent: "#bc1d52"
+    lightAccent: "#e72c47"
 
   author: Lukas Aldershaab
 
