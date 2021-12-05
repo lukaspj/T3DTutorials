@@ -32,7 +32,7 @@ _(The following steps is only necessary if you are not satisfied with just scrip
 and at some point want more than that. If you are only here for the scripting, the 
 binary files in the repo will be enough.)_ 
 
-**Before you** [download the repo](http://github.com/GarageGames/Torque3D) you should 
+**Before you** [download the repo](http://github.com/TorqueGameEngines/Torque3D) you should 
 be sure to setup your environment correctly! **First** do you have an IDE (Integrated 
 Development Environment)? No? If you are running Windows, you should go ahead and 
 download [Visual Studio](https://visualstudio.microsoft.com/vs/). **Now**, you need to 
@@ -144,8 +144,11 @@ This is all the life-cycle hooks we get for our module, the _Module life-cycle_ 
 are general for all modules, while the _Server_ and _Client life-cycle_ hooks are
 specific for `Game` modules.
 
-That is actually the basis of creating a module, before we move further we want an empty 
-level to work with.
+That is actually the basis of creating a module, the next step is to add an object and load it into the game.
+
+## Registering an object
+First of, we need some art to work with. We won't cover creation of art in this tutorial, 
+so just download [this folder](/assets/coin-collection-art.zip) and extract 
 
 ## Creating an empty level
 Launch Torque3D, and click the "Open World Editor" button, you can also access this editor from in-game.
@@ -156,8 +159,6 @@ Once inside the editor, play around with the terrain editing tools.
 [Here's a guide to creating your first terrain](https://torque-3d.readthedocs.io/en/latest/world/terrainblock.html).
 
 But we don't need anything fancy, a flat terrain is fine.
-
-**One little thing:** 
 
 Then click `File>Save Level As`.
 

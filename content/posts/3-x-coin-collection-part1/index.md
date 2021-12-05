@@ -32,7 +32,7 @@ _(The following steps is only necessary if you are not satisfied with just scrip
 and at some point want more than that. If you are only here for the scripting, the 
 binary files in the repo will be enough.)_ 
 
-**Before you** [download the repo](http://github.com/GarageGames/Torque3D) you should 
+**Before you** [download the repo](http://github.com/TorqueGameEngines/Torque3D) you should 
 be sure to setup your environment correctly! **First** do you have an IDE (Integrated 
 Development Environment)? No? If you are running Windows, you should go ahead and 
 download [Visual Studio](https://visualstudio.microsoft.com/vs/). **Now**, you need to 
@@ -42,8 +42,10 @@ the [PhysX SDK](http://www.nvidia.com/object/physx_downloads.html) as well.
 
 ### Scripting
 Nothing special is necessary in order to script with Torque3D, if the engine is 
-running you should be good to go. However you might want a 
-[scripting IDE](http://wiki.torque3d.org/introduction:scripting-ides).
+running you should be good to go. However you might want an IDE for scripting, I 
+suggest taking a look at either [Torsion](https://github.com/TorqueGameEngines/TorsionEditor)
+or [IntelliJ Community](https://www.jetbrains.com/idea/download) with the 
+[TorqueScript plugin](https://plugins.jetbrains.com/plugin/17218-torquescript-language-support).
 
 ## What is TorqueScript?
 TorqueScript (TS) is a C-like language. It is very basic. There are no 'types' in 
@@ -53,7 +55,7 @@ mind. One of the most interesting things about scripting in TS is that it is eve
 The engine runs the game and sends the necessary callbacks to the Script interface.
 
 TS is a (at the time of writing this) a pretty slow scripting language so you should avoid 
-having all your core features in script. Personally one of thing I use TS for is triggering 
+having all your core features in script. Personally one thing I use TS for is triggering 
 spell casts and spawn emitters, these are commands that aren't triggered a lot of times and 
 extremely handy to have in script. I wouldn't use scripts for minds for the AI players, for 
 prototyping it is okay but not for the release version of your game.
@@ -65,12 +67,22 @@ the editors works in this tutorial but I will link you to places where you can g
 specific task. So for a start I will ask you to create an empty project (choose the full template). 
 If you don't know how to, take a look at [this guide](http://garagegames.com/products/torque-3d/guides). 
 Now enter the game, press F11 to enter the editor and play around with the terrain editing 
-tools. [Here's an official guide to creating your first terrain](http://vimeo.com/album/223321/video/11629485).
+tools.
+
+This guide does not focus on the editors, so if you can't figure out how to create a terrain, 
+you should seek information somewhere else. Which brings me to:
+
+## Prerequisites
+This guide will cover scripting and logic, not the editors and how to work with Torque3D in general.
+It's assumed that you:
+ 
+ * Are able to run Torque3D
+ * Are able to create a new empty level
+ * Have familiarized yourself with the editors to some degree
 
 ## Place some objects
-For learning how to place objects in the world, [this video is a good place to start..](http://vimeo.com/album/223321/video/11630022) 
-But we don't need decoration right now. We need something we can interact with. So we need to create a 
-new object type! _First_ go into `Scripts/Server/ScriptExec.cs`, at the end of the file add a new line:
+Before we can place objects in the world, we define the objects.
+_First_ go into `Scripts/Server/ScriptExec.cs`, at the end of the file add a new line:
 
 {{< highlight tscript >}}
 exec("./Coin.cs");
